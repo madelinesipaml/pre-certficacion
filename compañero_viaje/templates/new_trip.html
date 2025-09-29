@@ -1,0 +1,41 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="center-wrapper">
+  <div class="form-box box">
+    <h2>Agregar un viaje</h2>
+  <p class="muted">Completa la información del viaje. Las fechas deben tener formato válido.</p>
+  <form method="post" class="trip-form">
+    <div class="form-grid">
+      <div class="input-group">
+        <label> <i class="fas fa-map-marker-alt"></i> Destino
+          <input name="destino" placeholder="Ej: Tokio, Japón" required>
+        </label>
+      </div>
+
+      <div class="input-group">
+        <label> <i class="fas fa-align-left"></i> Descripción
+          <textarea name="descripcion" placeholder="Breve descripción del plan (opcional)"></textarea>
+        </label>
+      </div>
+
+      <div class="input-group">
+        <label> <i class="fas fa-calendar-alt"></i> Fecha de inicio
+          <input name="fecha_inicio" type="date" required>
+        </label>
+      </div>
+
+      <div class="input-group">
+        <label> <i class="fas fa-calendar-check"></i> Fecha de fin
+          <input name="fecha_fin" type="date" required>
+        </label>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" class="btn primary" id="create-trip-btn"><i class="fas fa-paper-plane"></i> Crear viaje</button>
+      <a href="/" class="btn secondary"><i class="fas fa-arrow-left"></i> Volver</a>
+    </div>
+  </form>
+  </div>
+</div>
+{% endblock %}

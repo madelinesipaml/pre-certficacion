@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Compañero de Viaje</title>
+    <!-- Google Fonts + Font Awesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/styles.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <header>
+      <div class="header-inner">
+        <h1 class="brand"><a href="/">Compañero de Viaje</a></h1>
+        <nav class="nav-right">
+        {% if current_user.is_authenticated %}
+          <span class="greet">Hola, <strong>{{ current_user.nombre }}</strong></span>
+          <a class="btn ghost" href="/trips/new"><i class="fas fa-plus"></i> Crear viaje</a>
+          <a class="btn ghost" href="/logout"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a>
+        {% else %}
+          <a class="btn" href="/login"><i class="fas fa-sign-in-alt"></i> Iniciar sesión</a>
+          <a class="btn secondary" href="/register"><i class="fas fa-user-plus"></i> Registrarse</a>
+        {% endif %}
+        </nav>
+      </div>
+    </header>
+    <main>
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          <ul class="flashes">
+          {% for category, msg in messages %}
+            <li class="flash {{ category }}">{{ msg }}</li>
+          {% endfor %}
+          </ul>
+        {% endif %}
+      {% endwith %}
+      {% block content %}{% endblock %}
+    </main>
+    <footer>
+      <p>Madeline Toledo</p>
+    </footer>
+    <script src="/static/app.js"></script>
+    <!-- Modal (global) -->
+    <div id="modal-root" class="modal-root" aria-hidden="true">
+      <div class="modal-backdrop"></div>
+      <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <h3 id="modal-title"></h3>
+        <div id="modal-body" class="modal-body"></div>
+        <div class="modal-actions">
+          <button id="modal-cancel" class="btn secondary">Cancelar</button>
+          <button id="modal-confirm" class="btn">Confirmar</button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

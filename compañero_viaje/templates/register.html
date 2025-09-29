@@ -1,0 +1,14 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="form-box box">
+  <h2>Registro</h2>
+  <form method="post">
+    <label>Nombre: <input name="nombre" required></label>
+    <label>Apellido: <input name="apellido" required></label>
+    <label>Correo: <input name="email" type="email" required></label>
+    <label>Contraseña: <input name="password" type="password" minlength="8" required></label>
+    <label>Confirmar contraseña: <input name="confirm" type="password" minlength="8" required></label>
+    <button type="submit" class="btn">Registrarse</button>
+  </form>
+</div>
+{% endblock %}

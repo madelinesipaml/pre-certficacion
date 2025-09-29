@@ -1,0 +1,61 @@
+{% extends 'layout.html' %}
+{% block content %}
+<h2>Bienvenido{{ ' ' + current_user.nombre if current_user.is_authenticated else '' }}!</h2>
+
+<div class="dashboard-grid">
+  <section class="box">
+  <h3>Tu Calendario de Viajes</h3>
+    {% if my_created or my_joined %}
+    <table class="main-table">
+  <thead><tr><th>Descripción</th><th>Fecha inicio</th><th>Fecha fin</th><th>Plan</th><th>Acción</th></tr></thead>
+      <tbody>
+      {% for t in my_created %}
+        <tr data-trip-id="{{ t.id }}">
+          <td><a href="/trips/{{ t.id }}">{{ t.destino }}</a></td>
+          <td>{{ t.fecha_inicio.strftime('%d %b %Y') }}</td>
+          <td>{{ t.fecha_fin.strftime('%d %b %Y') }}</td>
+          <td>--</td>
+          <td>
+            <form action="/trips/{{ t.id }}/delete" method="post" style="display:inline"><button type="submit" class="btn danger"><i class="fas fa-trash-alt"></i> Eliminar</button></form>
+          </td>
+        </tr>
+      {% endfor %}
+      {% for t in my_joined %}
+        <tr data-trip-id="{{ t.id }}">
+          <td><a href="/trips/{{ t.id }}">{{ t.destino }}</a></td>
+          <td>{{ t.fecha_inicio.strftime('%d %b %Y') }}</td>
+          <td>{{ t.fecha_fin.strftime('%d %b %Y') }}</td>
+          <td>--</td>
+          <td><a class="btn secondary" href="/trips/{{ t.id }}/cancel"><i class="fas fa-times"></i> Cancelar</a></td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+      <p>No trips yet.</p>
+    {% endif %}
+  </section>
+
+  <section class="box">
+    <h3>Planes de otros usuarios</h3>
+    {% if others %}
+    <table class="main-table">
+  <thead><tr><th>Destino</th><th>Fecha inicio</th><th>Fecha fin</th><th>¿Quieres unirte?</th></tr></thead>
+      <tbody>
+      {% for t in others %}
+        <tr data-trip-id="{{ t.id }}">
+          <td><a href="/trips/{{ t.id }}">{{ t.destino }}</a></td>
+          <td>{{ t.fecha_inicio.strftime('%d %b %Y') }}</td>
+          <td>{{ t.fecha_fin.strftime('%d %b %Y') }}</td>
+          <td><a class="btn" href="/trips/{{ t.id }}/join"><i class="fas fa-user-plus"></i> Unir</a></td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+      <p>No other plans.</p>
+    {% endif %}
+  </section>
+</div>
+
+{% endblock %}

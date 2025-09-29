@@ -1,0 +1,21 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="box">
+  <h2>{{ trip.destino }}</h2>
+  <p>Planificado por: {{ trip.creador.nombre }} {{ trip.creador.apellido }}</p>
+  <p>Descripción: {{ trip.descripcion }}</p>
+  <p>Fecha de inicio: {{ trip.fecha_inicio.strftime('%d %B %Y') }}</p>
+  <p>Fecha de fin: {{ trip.fecha_fin.strftime('%d %B %Y') }}</p>
+
+  <h3>Otros usuarios que se han unido:</h3>
+  {% if joined_users %}
+    <ul>
+    {% for u in joined_users %}
+      <li>{{ u.nombre }} {{ u.apellido }}</li>
+    {% endfor %}
+    </ul>
+  {% else %}
+    <p>No hay otros usuarios unidos.</p>
+  {% endif %}
+</div>
+{% endblock %}

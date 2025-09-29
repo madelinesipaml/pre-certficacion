@@ -1,0 +1,64 @@
+{% extends 'layout.html' %}
+{% block content %}
+  <h2>Planes públicos</h2>
+  {% if trips %}
+    <ul class="trips">
+    {% for t in trips %}
+      <li>
+        <a href="/trips/{{ t.id }}">{{ t.destino if t.destino is defined else t.title }}</a> 
+        {{ t.fecha_inicio.strftime('%d %b %Y') if t.fecha_inicio else '' }} 
+        por {{ t.creador.nombre ~ ' ' ~ t.creador.apellido if t.creador else '' }}
+      </li>
+
+      </li>
+    {% endfor %}
+    </ul>
+  {% else %}
+    <p>No hay planes aún.</p>
+  {% endif %}
+{% endblock %}
+<div class="public-grid">
+  <div class="forms">
+    <section class="box">
+      <h3>Registro</h3>
+      <form method="post" action="/register">
+        <label>Nombre: <input name="nombre" required></label>
+        <label>Apellido: <input name="apellido" required></label>
+        <label>Correo: <input name="email" type="email" required></label>
+        <label>Contraseña: <input name="password" type="password" minlength="8" required></label>
+        <label>Confirmar contraseña: <input name="confirm" type="password" minlength="8" required></label>
+        <button type="submit">Registrarse</button>
+      </form>
+    </section>
+
+    <section class="box">
+      <h3>Iniciar sesión</h3>
+      <form method="post" action="/login">
+        <label>Correo: <input name="email" type="email" required></label>
+        <label>Contraseña: <input name="password" type="password" required></label>
+        <button type="submit">Entrar</button>
+      </form>
+    </section>
+  </div>
+
+  <div class="public-trips box">
+    <h3>Planes Públicos</h3>
+    {% if trips %}
+    <table class="trips-table">
+  <thead><tr><th>Destino</th><th>Fecha inicio</th><th>Fecha fin</th><th>Por</th></tr></thead>
+      <tbody>
+      {% for t in trips %}
+        <tr>
+          <td><a href="/trips/{{ t.id }}">{{ t.destino if t.destino is defined else t.title }}</a></td>
+          <td>{{ t.fecha_inicio.strftime('%d %b %Y') if t.fecha_inicio else '' }}</td>
+          <td>{{ t.fecha_fin.strftime('%d %b %Y') if t.fecha_fin else '' }}</td>
+          <td>{{ t.creador.nombre ~ ' ' ~ t.creador.apellido if t.creador else '' }}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+      <p>No hay planes aún.</p>
+    {% endif %}
+  </div>
+</div>

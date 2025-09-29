@@ -1,0 +1,135 @@
+:root{
+	/* Palette (pastel, from attachment) */
+	--strawberry: #9a7fdb;    /* STRAWBERRY */
+	--vanilla:    #29c0fc;    /* VANILLA */
+	--caramel:    #80dff0;    /* CARAMEL */
+	--chocolate:  #fc9ee7;    /* CHOCOLATE */
+	--lemon:      #c59af7;    /* LEMON */
+	--mint:       #797bf0;    /* MINT */
+
+	/* small darker variants for interactions */
+	--strawberry-dark:#80dff0;
+	--mint-dark: #bbfce6;
+
+	/* semantic tokens */
+	--bg: var(--vanilla);
+	--card:#80dff0;
+	--primary: var(--mint);
+	--accent: var(--caramel);
+	--muted: #bbfce6; /* warm muted brown */
+	--danger: var(--strawberry);
+	--shadow: 0 6px 18px rgba(16,24,40,0.06);
+}
+
+*{box-sizing:border-box}
+body{font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; margin:0; background:linear-gradient(180deg,var(--vanilla), #fff); color:var(--chocolate-dark)}
+
+header{background:linear-gradient(90deg,var(--chocolate), var(--mint)); color:white; padding:18px 24px}
+.header-inner{max-width:1100px; margin:0 auto; display:flex; align-items:center; justify-content:space-between}
+.brand a{color:white; text-decoration:none; font-weight:700; font-size:20px}
+.nav-right{display:flex; gap:12px; align-items:center}
+.greet{margin-right:8px; color:#e6fffa}
+
+main{max-width:1100px; margin:24px auto; padding:0 16px}
+footer{padding:18px 0; text-align:center; color:var(--muted)}
+
+.flashes{list-style:none; padding:0; margin:0 0 16px 0}
+.flash{padding:12px 16px; border-radius:8px; margin-bottom:8px; box-shadow:var(--shadow)}
+.flash.success{background:rgba(43,182,163,0.12); color:var(--mint-dark)}
+.flash.danger{background:rgba(239,71,111,0.08); color:var(--strawberry-dark)}
+.flash.info{background:rgba(255,210,102,0.12); color:var(--caramel)}
+
+/* buttons */
+.btn{display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border-radius:8px; background:var(--primary); color:white; text-decoration:none; border:none; cursor:pointer; font-weight:600; transition:transform .12s ease, background-color .12s ease, color .12s ease, box-shadow .12s ease}
+.btn i{opacity:0.9}
+.btn.secondary{background:#fff; color:var(--chocolate); border:1px solid rgba(16,24,40,0.04)}
+.btn.ghost{background:transparent; color:var(--strawberry); border:1px solid rgba(255,255,255,0.04)}
+.btn.danger{background:var(--danger)}
+.btn:hover{transform:translateY(-1px); box-shadow:0 8px 20px rgba(2,6,23,0.08)}
+
+/* Hover/focus color variants */
+.btn.primary:hover, .btn.primary:focus{background:var(--mint-dark); color:white}
+.btn.secondary:hover, .btn.secondary:focus{background:var(--chocolate); color:white; border-color:transparent}
+.btn.danger:hover, .btn.danger:focus{background:var(--strawberry-dark); color:white}
+.btn.ghost:hover, .btn.ghost:focus{background:rgba(255,255,255,0.06); color:var(--strawberry)}
+
+/* Keyboard focus visible */
+.btn:focus{outline:none; box-shadow:0 0 0 3px rgba(43,182,163,0.12)}
+
+/* grids and cards */
+.public-grid{display:grid; grid-template-columns:360px 1fr; gap:20px}
+.box{background:var(--card); border-radius:8px; padding:18px; box-shadow:var(--shadow); border:1px solid rgba(16,24,40,0.04); min-height:360px}
+.forms .box{padding:16px}
+
+/* forms */
+.form-box{max-width:720px; margin:24px auto; width:100%; box-sizing:border-box}
+
+/* make .box used as form container not force tall min-height */
+.form-box.box{min-height:auto; border-radius:12px}
+
+/* wrapper to strictly center form cards */
+.center-wrapper{display:flex; justify-content:center; align-items:flex-start; padding:18px 0}
+.center-wrapper .form-box{width:640px; max-width:92%; box-shadow:0 12px 30px rgba(16,24,40,0.08); padding:26px}
+.form-box label{display:block; margin-bottom:10px; font-size:14px; color:var(--muted)}
+.form-box input, .form-box textarea, .form-box input[type=date]{width:100%; padding:10px; border-radius:8px; border:1px solid rgba(16,24,40,0.06); margin-top:6px}
+.form-box textarea{min-height:80px}
+
+/* tables */
+.trips-table, .main-table{width:100%; border-collapse:collapse; font-size:14px}
+.trips-table th, .trips-table td, .main-table th, .main-table td{padding:10px; text-align:left}
+.trips-table thead th, .main-table thead th{background:#fbfeff; color:var(--muted); font-weight:600; border-bottom:1px solid rgba(16,24,40,0.04)}
+.main-table tbody tr{border-bottom:1px solid rgba(16,24,40,0.04)}
+.main-table tbody tr:nth-child(odd){background:transparent}
+.main-table a{color:var(--caramel); text-decoration:underline}
+
+.dashboard-grid{display:grid; grid-template-columns:480px 480px; gap:20px; justify-content:center; align-items:start; margin:0 auto}
+
+@media (max-width:900px){
+	.public-grid{grid-template-columns:1fr}
+	.dashboard-grid{grid-template-columns:1fr}
+}
+
+/* new trip form styles */
+.trip-form .form-grid{display:grid; grid-template-columns:1fr 1fr; gap:12px}
+.trip-form .input-group label{display:flex; flex-direction:column; font-size:14px; color:var(--muted)}
+.trip-form .input-group i{margin-right:8px; color:var(--mint)}
+.trip-form input, .trip-form textarea{padding:10px; border-radius:8px; border:1px solid rgba(16,24,40,0.06); margin-top:8px}
+.form-actions{margin-top:14px; display:flex; gap:10px; align-items:center}
+.btn.primary{background:var(--primary)}
+
+/* small spinner for submit (CSS-only) */
+.btn .spinner{display:inline-block; width:14px; height:14px; border:2px solid rgba(255,255,255,0.6); border-top-color:rgba(255,255,255,0.95); border-radius:50%; margin-left:8px; animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+@media (max-width:700px){.trip-form .form-grid{grid-template-columns:1fr}}
+
+/* Modal styles */
+.modal-root{position:fixed; inset:0; display:none; align-items:center; justify-content:center; z-index:1200}
+.modal-root[aria-hidden="false"]{display:flex}
+.modal-backdrop{position:absolute; inset:0; background:rgba(2,6,23,0.5)}
+.modal-card{position:relative; background:var(--card); border-radius:12px; padding:18px; width:480px; max-width:92%; box-shadow:0 10px 30px rgba(2,6,23,0.12); z-index:10}
+.modal-body{margin:12px 0; color:#0f172a}
+.modal-actions{display:flex; gap:10px; justify-content:flex-end}
+
+/* row removal animation */
+.fade-out{animation:fadeOut .45s forwards}
+@keyframes fadeOut{to{opacity:0; transform:translateY(-8px); height:0; margin:0; padding:0}}
+
+/* Highlight animation for newly created rows */
+.new-highlight{animation:newPulse 2.5s ease-in-out forwards; box-shadow:0 6px 20px rgba(37,109,106,0.12)}
+@keyframes newPulse{
+	0%{background: rgba(102, 143, 255, 0.95)}
+	30%{background: rgba(35, 212, 12, 0.9)}
+	60%{background: #b39deecc}
+	100%{background:transparent}
+}
+
+/* new row highlight */
+.new-highlight{animation:highlightPulse 2.4s ease-in-out}
+@keyframes highlightPulse{
+	0%{background:rgba(201, 189, 162, 0.95)}
+	30%{background:rgba(18, 177, 124, 0.9)}
+	60%{background:transparent}
+	100%{background:transparent}
+}
+
